@@ -1,0 +1,24 @@
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Distribución / build
+build/
+dist/
+*.egg-info/
+
+# Configuración de IDE
+.vscode/
+.idea/
+
+# Variables de entorno
+.env
+
+# Sistema operativo
+.DS_Store

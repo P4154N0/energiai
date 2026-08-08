@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "2f727150-022f-4408-91eb-14959825ab8f",
+    "name": "⚡ EnergIAi API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41344532"
+  },
+  "item": [
+    {
+      "name": "☕ Java Backend (Java / Spring Boot)",
+      "item": [
+        {
+          "name": "❤️ Health",
+          "item": [
+            {
+              "name": "❤️ Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/v1/health",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "v1",
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "⚡ Análisis Energético Java",
+          "item": [
+            {
+              "name": "⚡ Análisis Energético",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"householdSize\": 4,\r\n  \"hasAc\": 1,\r\n  \"homeOffice\": false,\r\n  \"housingType\": \"CASA\",\r\n  \"equipmentCount\": 2,\r\n  \"consumoTotalMesAnterior\": 420,\r\n  \"peakUsageLevel\": \"HIGH\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/analisis-energetico",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "analisis-energetico"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🐍 Python Microservice (FastAPI / IA)",
+      "item": [
+        {
+          "name": "⚡ Análisis Energético Python",
+          "item": [
+            {
+              "name": "⚡ Análisis Energético Python - FastApi",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"household_size\": 4,\r\n  \"has_ac\": 1,\r\n  \"home_office\": false,\r\n  \"housing_type\": \"CASA\",\r\n  \"equipment_count\": 8,\r\n  \"avg_energy_consumption_kwh\": 13.54,\r\n  \"peak_usage_level\": \"HIGH\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:8000/predict",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "predict"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "❤️ Health Copy",
+          "item": [
+            {
+              "name": "❤️ Health",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:8000/health",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
