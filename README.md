@@ -24,6 +24,7 @@
 - [Estado del proyecto](#-estado-del-proyecto)
 - [Problema y Necesidad](#-problema-y-necesidad)
 - [Características Clave](#-características-clave)
+- [Interfaz de Usuario y Observabilidad](#-Interfaz-de-Usuario-y-Observabilidad)
 - [Arquitectura del Sistema](#️-arquitectura-del-sistema)
 - [Arquitectura de Infraestructura (OCI)](#️-arquitectura-de-infraestructura-oci)
 - [Componentes del Proyecto](#-componentes-del-proyecto)
@@ -80,8 +81,6 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
   * 🔴 `API DESCONECTADA · MODO FALLBACK` (Pulsador rojo titilante en caso de contingencia de red).
 
 ---
-
-## 📸 Interfaz de Usuario y Observabilidad
 
 ## 📸 Interfaz de Usuario y Observabilidad
 
