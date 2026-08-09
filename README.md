@@ -24,20 +24,21 @@
 - [Estado del proyecto](#estado-del-proyecto)
 - [Problema y Necesidad](#problema-y-necesidad)
 - [Características Clave](#características-clave)
-- [Interfaz de Usuario y Observabilidad](#interfaz-de-usuario-y-observabilidad)
-- [Arquitectura del Sistema](#arquitectura-del-sistema)
-- [Arquitectura de Infraestructura (OCI)](#arquitectura-de-infraestructura-oci)
-- [Pruebas de Carga y Rendimiento (Benchmarking)](#pruebas-de-carga-rendimiento-y-elasticidad-benchmarking)
-- [Componentes del Proyecto](#componentes-del-proyecto)
+- [Interfaz de Usuario y Observabilidad](#interfaz)
+- [Arquitectura del Sistema](#arquitectura-sistema)
+- [Arquitectura de Infraestructura (OCI)](#arquitectura-oci)
+- [Pruebas de Carga y Rendimiento (Benchmarking)](#benchmarking)
+- [Componentes del Proyecto](#componentes)
 - [Tecnologías](#tecnologías)
 - [Dataset](#dataset)
-- [Atribución de Roles y Equipo](#atribución-de-roles-y-equipo)
-- [Cómo ejecutar el proyecto](#-cómo-ejecutar-el-proyecto)
-- [Documentación Técnica](#-documentación-técnica)
-- [Créditos](#-créditos)
+- [Atribución de Roles y Equipo](#equipo)
+- [Cómo ejecutar el proyecto](#ejecucion)
+- [Documentación Técnica](#documentacion-tecnica)
+- [Créditos](#créditos)
 
 ---
 
+<a id="descripción"></a>
 ## 📋 Descripción
 
 **EnergIAi** es una plataforma integral que analiza el consumo eléctrico residencial mediante Inteligencia Artificial y reglas de negocio adaptativas. A partir de parámetros como el consumo mensual, cantidad de electrodomésticos, rutina en horario pico y tarifa contratada, la solución:
@@ -51,6 +52,7 @@ Proyecto ideado originalmente para el **Hackathon ONE — Proyectos G9 | Alura +
 
 ---
 
+<a id="estado-del-proyecto"></a>
 ## 🚦 Estado del Proyecto
 
 | Componente | Estado |
@@ -63,6 +65,7 @@ Proyecto ideado originalmente para el **Hackathon ONE — Proyectos G9 | Alura +
 
 ---
 
+<a id="problema-y-necesidad"></a>
 ## 🧩 Problema y Necesidad
 
 Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender qué hábitos o equipos generan dicho impacto. **EnergIAi** transforma datos crudos de consumo en diagnóstico claro e interactivo, permitiendo:
@@ -73,6 +76,7 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 
 ---
 
+<a id="características-clave"></a>
 ## ✨ Características Clave
 
 * **Tarifa Configurable ($/kWh):** Permite ingresar la tarifa específica de la distribuidora eléctrica (por defecto $0.75).
@@ -83,6 +87,7 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 
 ---
 
+<a id="interfaz"></a>
 ## 📸 Interfaz de Usuario y Observabilidad
 
 ### 1. Clasificación del Perfil Energético
@@ -103,6 +108,7 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 
 ---
 
+<a id="arquitectura-sistema"></a>
 ## 🏗️ Arquitectura del Sistema
 
 ```text
@@ -134,6 +140,7 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 
 ---
 
+<a id="arquitectura-oci"></a>
 ## ☁️ Arquitectura de Infraestructura (OCI)
 
 El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** en la región Brazil East (São Paulo):
@@ -147,6 +154,7 @@ El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** 
 
 ---
 
+<a id="benchmarking"></a>
 ## ⚡ Pruebas de Carga, Rendimiento y Elasticidad (Benchmarking)
 
 Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga destructiva y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
@@ -177,6 +185,7 @@ Para garantizar un estándar de producción real, la API desplegada en **Oracle 
 
 ---
 
+<a id="componentes"></a>
 ## 📦 Componentes del Proyecto
 
 | Carpeta | Responsabilidad | Documentación |
@@ -189,6 +198,7 @@ Para garantizar un estándar de producción real, la API desplegada en **Oracle 
 
 ---
 
+<a id="tecnologías"></a>
 ## 🛠️ Tecnologías
 
 * **Backend Core:** Java 21 LTS + Spring Boot 3.3.x + Jakarta Validation.
@@ -199,12 +209,14 @@ Para garantizar un estándar de producción real, la API desplegada en **Oracle 
 
 ---
 
+<a id="dataset"></a>
 ## 📊 Dataset
 
 El modelo predictivo fue entrenado utilizando el dataset público **[Household Energy Consumption](https://www.kaggle.com/datasets/samxsam/household-energy-consumption)** de Kaggle, procesado y optimizado para clasificación supervisada.
 
 ---
 
+<a id="equipo"></a>
 ## 👥 Atribución de Roles y Equipo
 
 * **[Jonathan Marino](https://www.linkedin.com/in/jonathan-marino/):** Exploración, curado y limpieza del dataset (EDA).
@@ -213,11 +225,13 @@ El modelo predictivo fue entrenado utilizando el dataset público **[Household E
   * Arquitectura del Backend Core en Java 21 / Spring Boot 3.3.x (DTOs, Validaciones, Estrategia de Fallback).
   * Microservicio de Inferencia de ML en Python / FastAPI.
   * Arquitectura, despliegue y hardening de infraestructura en Oracle Cloud Infrastructure (OCI).
+  * **Pruebas de Carga, Estrés y Benchmarking (Grafana k6):** Diseño de la suite de stress testing, auditoría de métricas de SLA ($p(95) < 75\text{ ms}$) y observabilidad de hardware (`htop`) en la nube.
   * Diseño y desarrollo de la Interfaz Frontend, velocímetro dinámico, tarifa configurable y observabilidad visual del estado de API en tiempo real.
 * **Soporte Colaborativo / Integrantes:** Agustina Lerda, Annie Lehmann, Frank Mijhael Bendezu Hinostroza.
 
 ---
 
+<a id="ejecucion"></a>
 ## ⚙️ Cómo Ejecutar el Proyecto
 
 ### 1. Clonar el repositorio
@@ -249,6 +263,14 @@ La aplicación estará accesible desde el navegador en http://localhost:8080.
 
 ---
 
+<a id="documentacion-tecnica"></a>
+## 📄 Documentación Técnica
+
+http://localhost:8080/swagger-ui.html
+
+---
+
+<a id="créditos"></a>
 ## 🙌 Créditos & Agradecimientos
 
 Proyecto desarrollado en el marco de la simulación laboral de **No Country** junto al programa **ONE (Oracle Next Education)** — Proyectos G9 | **Alura Latam** + **Oracle**.
