@@ -249,8 +249,9 @@ La aplicación estará accesible desde el navegador en http://localhost:8080.
 
 ---
 
-🙌 Créditos
-Proyecto ideado en el marco del Hackathon ONE — Proyectos G9 | Alura + Oracle.
+## 🙌 Créditos & Agradecimientos
+
+Proyecto desarrollado en el marco de la simulación laboral de **No Country** junto al programa **ONE (Oracle Next Education)** — Proyectos G9 | **Alura Latam** + **Oracle**.
 
 ---
 
