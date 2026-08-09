@@ -22,6 +22,7 @@
 - [Descripción del Problema](#-descripción-del-problema)
 - [Arquitectura de la Aplicación](#️-arquitectura-de-la-aplicación)
 - [Arquitectura de Infraestructura (OCI)](#️-arquitectura-de-infraestructura-oci)
+- [Benchmarking & Performance Testing (k6)](#-benchmarking--performance-testing-k6)
 - [Tecnologías Utilizadas](#️-tecnologías-utilizadas)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Instalación y Ejecución Local](#️-instalación-y-ejecución-local)
@@ -89,6 +90,83 @@ El proyecto se encuentra desplegado sobre **dos máquinas virtuales de Oracle Cl
 ![Arquitectura de red con las dos máquinas en OCI](docs/images/arquitectura_oci_dos_maquinas.png)
 
 > 🔧 Proceso completo de configuración de infraestructura (paso a paso, decisiones y problemas resueltos) en [`oci/README.md`](../oci/README.md).
+
+---
+
+---
+
+## ⚡ Benchmarking & Performance Testing (k6)
+
+Para validar la resiliencia y capacidad de respuesta en entornos de alta concurrencia, el backend Java 21 / Spring Boot 3.3.x desplegado en **Oracle Cloud Infrastructure (OCI)** fue auditado rigurosamente utilizando la herramienta de Pruebas de Carga **Grafana k6**, monitoreando el consumo de recursos de hardware en vivo vía `htop`.
+
+Los scripts de prueba y sus configuraciones se encuentran versionados dentro de la carpeta local `./k6/script/`.
+
+---
+
+### 🏥 1. Diagnóstico de Salud de Infraestructura (`GET /api/v1/health`)
+
+Prueba de carga destructiva sobre el servlet container (Tomcat) para evaluar la gestión de sockets e hilos bajo una demanda máxima de **30 Usuarios Virtuales (VUs)** durante un periodo de 2 minutos.
+
+#### ⚙️ Comando de Ejecución Local:
+```bash
+k6 run k6/script/test-health.js
+```
+
+---
+
+#### 📊 Evidencias de Ejecución (Ciclo de Vida de Carga)
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Uso CPU (`htop`) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Health Baseline](./k6/images/health/health-htop-baseline.png) | ![Health CPU Peak](./k6/images/health/health-htop-cpu-peak.png) | ![Health Metrics](./k6/images/health/health-k6-metrics-verde.png) |
+| *Estado inactivo (0.7% CPU, 420 MB RAM).* | *Escalado elástico de CPU (27.2%) bajo demanda.* | *SLA cumplido: p(95) = 57.37 ms y 0.00% errores.* |
+
+* **Resultados Métrica SLA:** 1,687 peticiones totales | **p(95) = 57.37 ms** | **0.00%** tasa de fallos.
+
+---
+
+### ⚡ 2. Ingesta y Cálculo de Dominio Real (`POST /analisis-energetico`)
+
+Prueba de carga funcional sobre el servicio de negocio principal. Evalúa el parseo y deserialización de payloads JSON, cálculo nativo de consumo mensual/diario con `java.time.YearMonth`, invocación al cliente de inferencia de ML y formateo de respuestas de observabilidad.
+
+#### ⚙️ Comando de Ejecución Local:
+```bash
+k6 run k6/script/test-api-energiai.js
+```
+
+---
+
+#### 📊 Evidencias de Ejecución (Ciclo de Vida de Carga)
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Uso CPU (`htop`) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Energiai Baseline](./k6/images/energiai/analisis-energetico-htop-baseline.png) | ![Energiai CPU Peak](./k6/images/energiai/analisis-energetico-htop-cpu-peak.png) | ![Energiai Metrics](./k6/images/energiai/analisis-energetico-k6-metrics-verde.png) |
+| *Servidor listo para la ingesta de DTOs.* | *Inferencia y parseo JSON con consumo estable (418 MB RAM).* | *133 DTOs procesados con p(95) = 74.36 ms y 0% errores.* |
+
+* **Resultados Métrica SLA:** 133 DTOs procesados | **p(95) = 74.36 ms** | **0.00%** tasa de fallos.
+* **Gestión de Memoria JVM:** La memoria residente (RES) se congeló en **418 MB / 954 MB**, confirmando la ausencia total de fugas de memoria (*memory leaks*).
+
+---
+
+### ⚡ 2. Ingesta y Cálculo de Dominio Real (`POST /analisis-energetico`)
+
+Prueba de carga funcional sobre el servicio de negocio principal. Evalúa el parseo y deserialización de payloads JSON, cálculo nativo de consumo mensual/diario con `java.time.YearMonth`, invocación al cliente de inferencia de ML y formateo de respuestas de observabilidad.
+
+#### ⚙️ Comando de Ejecución Local:
+```bash
+k6 run k6/script/test-api-energiai.js
+```
+
+---
+
+### 🏥 1. Diagnóstico de Salud de Infraestructura (`GET /api/v1/health`)
+
+Prueba de carga destructiva sobre el servlet container (Tomcat) para evaluar la gestión de sockets e hilos bajo una demanda máxima de **30 Usuarios Virtuales (VUs)** durante un periodo de 2 minutos.
+
+#### ⚙️ Comando de Ejecución Local:
+```bash
+k6 run k6/script/test-health.js
+```
 
 ---
 

@@ -27,6 +27,7 @@
 - [Interfaz de Usuario y Observabilidad](#-Interfaz-de-Usuario-y-Observabilidad)
 - [Arquitectura del Sistema](#️-arquitectura-del-sistema)
 - [Arquitectura de Infraestructura (OCI)](#️-arquitectura-de-infraestructura-oci)
+- [Pruebas de Carga y Rendimiento (Benchmarking)](#-pruebas-de-carga-y-rendimiento-benchmarking)
 - [Componentes del Proyecto](#-componentes-del-proyecto)
 - [Tecnologías](#️-tecnologías)
 - [Dataset](#-dataset)
@@ -130,6 +131,9 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
            AnalisisEnergeticoResponse
         (Metadatos de Observabilidad)
 ```
+
+---
+
 ## ☁️ Arquitectura de Infraestructura (OCI)
 
 El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** en la región Brazil East (São Paulo):
@@ -140,6 +144,36 @@ El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** 
 | **VM Python** | Inferencia ML (FastAPI + `.pkl`) | `147.15.16.156` | `10.0.0.164` | 8000 | ✅ Operativa (systemd) |
 
 *Nota de Seguridad:* La comunicación hacia la VM de Python está restringida mediante **Security Lists de OCI** e `iptables`, permitiendo tráfico al puerto 8000 únicamente desde la subred interna (`10.0.0.0/24`).
+
+---
+
+## ⚡ Pruebas de Carga, Rendimiento y Elasticidad (Benchmarking)
+
+Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga destructiva y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
+
+---
+
+### 🏥 1. Diagnóstico de Infraestructura (`GET /health`)
+* **Concurrencia Probada:** Ráfagas de hasta **30 usuarios virtuales (VUs)** simultáneos.
+* **Elasticidad de Procesador:** La JVM despertó los núcleos bajo demanda pasando de **0.7% a 27.2% de CPU**, retornando al estado basal inmediatamente al finalizar.
+* **Métrica SLA:** Latencia **$p(95) = 57.37\text{ ms}$** y **0.00% tasa de fallos** sobre 1,687 peticiones.
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (30 VUs) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Health Baseline](./backend-java/k6/images/health/health-htop-baseline.png) | ![Health CPU Peak](./backend-java/k6/images/health/health-htop-cpu-peak.png) | ![Health Metrics](./backend-java/k6/images/health/health-k6-metrics-verde.png) |
+| *Servidor en reposo (0.7% CPU, ~420 MB RAM).* | *Escalado elástico de CPU sin degradar la memoria.* | *1,00% de éxito, 0% errores y $p(95) < 58\text{ ms}$.* |
+
+---
+
+### 🧪 2. Servicio de Ingesta y Cálculo Energético (`POST /analisis-energetico`)
+* **Carga de Negocio:** Procesamiento e interpretación de DTOs JSON con evaluación del perfil energético.
+* **Estabilidad de Memoria:** Memoria RAM congelada en **418 MB / 954 MB** demostrando la ausencia de fugas de memoria (*memory leaks*).
+* **Métrica SLA:** Latencia **$p(95) = 74.36\text{ ms}$** y **0.00% tasa de fallos** sobre 133 peticiones reales.
+
+| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (5 VUs) | 🟢 3. Reporte Final (`k6`) |
+|:---:|:---:|:---:|
+| ![Energiai Baseline](./backend-java/k6/images/energiai/analisis-energetico-htop-baseline.png) | ![Energiai CPU Peak](./backend-java/k6/images/energiai/analisis-energetico-htop-cpu-peak.png) | ![Energiai Metrics](./backend-java/k6/images/energiai/analisis-energetico-k6-metrics-verde.png) |
+| *Servidor listo para recibir payloads de ingesta.* | *Absorción de carga JSON manteniendo consumo en ~418 MB.* | *133 peticiones POST procesadas en $< 75\text{ ms}$.* |
 
 ---
 
