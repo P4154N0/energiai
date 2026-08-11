@@ -39,13 +39,41 @@
           "name": "⚡ Análisis Energético Java",
           "item": [
             {
-              "name": "⚡ Análisis Energético",
+              "name": "⚡ Análisis Energético sin Tarifa",
               "request": {
                 "method": "POST",
                 "header": [],
                 "body": {
                   "mode": "raw",
                   "raw": "{\r\n  \"householdSize\": 4,\r\n  \"hasAc\": 1,\r\n  \"homeOffice\": false,\r\n  \"housingType\": \"CASA\",\r\n  \"equipmentCount\": 2,\r\n  \"consumoTotalMesAnterior\": 420,\r\n  \"peakUsageLevel\": \"HIGH\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/analisis-energetico",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "analisis-energetico"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "⚡ Análisis Energético con Tarifa",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"householdSize\": 4,\r\n  \"equipmentCount\": 10,\r\n  \"consumoTotalMesAnterior\": 420.0,\r\n  \"peakUsageLevel\": \"HIGH\",\r\n  \"housingType\": \"CASA\",\r\n  \"hasAc\": 1,\r\n  \"homeOffice\": true,\r\n  \"tarifaPorKwh\": 2.75\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"

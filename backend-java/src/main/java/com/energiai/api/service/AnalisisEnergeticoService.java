@@ -14,8 +14,16 @@ import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
  */
 
 public interface AnalisisEnergeticoService {
-    // TODO: define el contrato — qué operaciones ofrece el servicio
 
     AnalisisEnergeticoResponse analizar(ConsumoEnergeticoRequest request);
 
+    /**
+     * Conmuta la simulación de caída de la IA en tiempo real para pruebas de resiliencia.
+     */
+    boolean toggleSimulacionCaida();
+
+    /**
+     * Consulta el estado actual de la simulación de caída.
+     */
+    boolean isSimulacionCaidaActiva();
 }

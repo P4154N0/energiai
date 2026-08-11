@@ -79,32 +79,46 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 <a id="características-clave"></a>
 ## ✨ Características Clave
 
-* **Tarifa Configurable ($/kWh):** Permite ingresar la tarifa específica de la distribuidora eléctrica (por defecto $0.75).
-* **Defensa en Profundidad y Fallback en Backend:** Si el microservicio de IA en Python no responde o sufre un timeout, el backend Java ataja la excepción y responde mediante un cliente Mock desacoplado, garantizando disponibilidad 100%.
-* **Observabilidad Visual en Tiempo Real:** El frontend detecta la fuente de los datos (`IA_PYTHON_REAL` vs `MOCK_FALLBACK`) y conmuta de forma reactiva el pulsador del header:
-  * 🟢 `API CONECTADA · AGRARIO` (Respuesta real del modelo IA).
-  * 🔴 `API DESCONECTADA · MODO FALLBACK` (Pulsador rojo titilante en caso de contingencia de red).
+* **Tarifa Configurable ($/kWh):** Cálculo financiero adaptativo según el valor por unidad ingresado por el usuario o empresa.
+* **Internacionalización Nativa (i18n):** Interfaz bilingüe (**Español / Inglés**) conmutable en tiempo real sin recargar la página.
+* **Inyección de Fallas & Resiliencia (Kill Switch):** Incluye un interruptor en cabecera (*Simular Caída*) que intercepta la solicitud y fuerza el flujo hacia el cliente `MlModelClientMock` para probar la tolerancia a fallos en vivo.
+* **Observabilidad Visual Reactiva:** El frontend detecta el origen de los datos (`IA_PYTHON_REAL` vs `MOCK_FALLBACK`) y conmuta automáticamente el indicador de la cabecera:
+  * 🟢 `API CONECTADA · AGRARIO` (Respuesta real servida por el modelo en Python).
+  * 🔴 `API DESCONECTADA · MODO FALLBACK` (Respuesta de contingencia por simulación o caída de red).
 
 ---
 
 <a id="interfaz"></a>
 ## 📸 Interfaz de Usuario y Observabilidad
 
-### 1. Clasificación del Perfil Energético
+### 1. Clasificación del Perfil Energético y Soporte Bilingüe (ES / EN)
 
 | 🟢 Perfil Eficiente | 🟡 Perfil Moderado | 🔴 Perfil Ineficiente |
 |:---:|:---:|:---:|
-| ![Perfil Eficiente](docs/images/eficiente.jpeg) | ![Perfil Moderado](docs/images/moderado.jpeg) | ![Perfil Ineficiente](docs/images/ineficiente.jpeg) |
+| ![Perfil Eficiente](docs/images/eficiente.png) | ![Perfil Moderado](docs/images/moderado.png) | ![Perfil Ineficiente](docs/images/ineficiente.png) |
 | *Consumo optimizado con bajo impacto financiero.* | *Consumo dentro del promedio con margen de mejora.* | *Consumo elevado con alertas y recomendaciones de ahorro.* |
+
+> 🌐 **Internacionalización:** Toda la interfaz y el diagnósticos son conmutables en tiempo real entre **Español (ES)** e **Inglés (EN)** en un solo clic.
 
 ---
 
-### 2. Observabilidad y Resiliencia en Tiempo Real
+### 2. Observabilidad y Resiliencia en Tiempo Real (Kill Switch & Fallback)
 
-| 🟢 API Conectada (`IA_PYTHON_REAL`) | 🔴 Modo Fallback (`MOCK_FALLBACK`) |
+| 🟢 Operación Normal (`IA_PYTHON_REAL`) | 🔴 Simulación de Caída Activa (`MOCK_FALLBACK`) |
 |:---:|:---:|
-| ![API Conectada](docs/images/eficiente.jpeg) | ![Modo Fallback](docs/images/mock.jpeg) |
-| *Inferencia en tiempo real servida por el microservicio de ML en Python.* | *Respuesta contingente servida por Java ante caídas de red o timeouts.* |
+| ![API Conectada](docs/images/eficiente.png) | ![Modo Fallback](docs/images/mock.png) |
+| *Inferencia servida en tiempo real por el microservicio en Python.* | *Respuesta de contingencia forzada desde el Toggle de Simulación.* |
+
+---
+
+### 🎬 Demostración en Vivo (Live Demo)
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=ID_DE_TU_VIDEO" target="_blank">
+    <img src="https://img.youtube.com/vi/ID_DE_TU_VIDEO/maxresdefault.jpg" alt="Ver Demo en YouTube" width="85%" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+  </a>
+  <p><em>▶️ Haz clic en la imagen para ver la demostración interactiva en YouTube (Prueba de Kill Switch y conmutación ES/EN).</em></p>
+</div>
 
 ---
 

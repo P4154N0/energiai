@@ -52,18 +52,18 @@ public class ConsumoEnergeticoRequest {
 
     /**
      * Parámetro tarifario ingresado por el usuario o empresa por kWh.
-     * Si no se especifica o llega nulo/inválido, se utiliza el costo por defecto (0.75).
+     * Si no se especifica o llega nulo/inválido, se utiliza la tarifa por defecto (0.75).
      */
-    @Positive(message = "El costo por kWh debe ser un valor estrictamente mayor a cero")
-    private Double costoPorKwh;
+    @Positive(message = "La tarifa por kWh debe ser un valor strictly mayor a cero")
+    private Double tarifaKwh;
 
     /**
-     * Getter personalizado para garantizar que nunca viaje un costo nulo o <= 0 al cálculo de negocio.
+     * Getter personalizado para garantizar que nunca viaje una tarifa nula o <= 0 al cálculo de negocio.
      */
-    public Double getCostoPorKwh() {
-        if (costoPorKwh == null || costoPorKwh <= 0.0) {
+    public Double getTarifaKwh() {
+        if (tarifaKwh == null || tarifaKwh <= 0.0) {
             return 0.75;
         }
-        return costoPorKwh;
+        return tarifaKwh;
     }
 }

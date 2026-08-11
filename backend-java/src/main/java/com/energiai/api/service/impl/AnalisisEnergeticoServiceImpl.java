@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * EL COCINERO JEFE Y EL ARTE DEL FALLBACK (Service Implementation)
@@ -24,10 +25,10 @@ import java.util.List;
  * y solicita el saber del Repostero Titular (Servicio Python).
  *
  * Mas, si el Repostero Titular ha ausentado su presencia o sus hornos se han enfriado (falla de red),
+ * o si se ha activado manualmente la simulación de mantenimiento en cocina (simularCaidaIa),
  * el Cocinero Jefe no desespera ni envía una bandeja vacía al salón: acude de inmediato al
  * Repostero Ayudante (MlModelClientMock). Éste, en un acto de perfecta resiliencia, emplata
- * la réplica exacta en la misma vajilla dorada. El comensal en el salón jamás sabrá del drama
- * en la cocina; solo disfrutará de la excelencia de su banquete.
+ * la réplica exacta en la misma vajilla dorada.
  */
 @Service
 public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService {
@@ -36,6 +37,9 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
     private final MlModelClient mockClient;
     private final RecomendacionesEngine recomendacionesEngine;
 
+    // Interruptor atómico de simulación de caída para pruebas en vivo y demostraciones
+    private final AtomicBoolean simularCaidaIa = new AtomicBoolean(false);
+
     public AnalisisEnergeticoServiceImpl(
             @Qualifier("mlModelClientImpl") MlModelClient realClient,
             @Qualifier("mlModelClientMock") MlModelClient mockClient,
@@ -43,6 +47,18 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         this.realClient = realClient;
         this.mockClient = mockClient;
         this.recomendacionesEngine = recomendacionesEngine;
+    }
+
+    @Override
+    public boolean toggleSimulacionCaida() {
+        boolean nuevoEstado = !simularCaidaIa.get();
+        simularCaidaIa.set(nuevoEstado);
+        return nuevoEstado;
+    }
+
+    @Override
+    public boolean isSimulacionCaidaActiva() {
+        return simularCaidaIa.get();
     }
 
     @Override
@@ -55,8 +71,12 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
         String fuenteDatos;
         String detalleFuente;
 
-        // 2. Estrategia de Fallback (Resiliencia ante fallas de red)
+        // 2. Estrategia de Fallback (Resiliencia ante fallas de red o simulación activa)
         try {
+            if (simularCaidaIa.get()) {
+                throw new RuntimeException("Simulación de caída de servicio activada manualmente desde el panel de control");
+            }
+
             resultadoMl = realClient.predecir(mlRequest);
             fuenteDatos = "IA_PYTHON_REAL";
             detalleFuente = "Procesado exitosamente por el modelo de IA en Python";
@@ -71,7 +91,7 @@ public class AnalisisEnergeticoServiceImpl implements AnalisisEnergeticoService 
 
         // 3. Cálculos de negocio propios de Java (Costo Estimado Mensual)
         Double consumoTotal = request.getConsumoTotalMesAnterior();
-        Double tarifa = request.getCostoPorKwh();
+        Double tarifa = request.getTarifaKwh();
         Double costoEstimado = (consumoTotal != null) ? consumoTotal * tarifa : 0.0;
 
         // 4. Construcción de recomendaciones personalizadas según perfil e IA

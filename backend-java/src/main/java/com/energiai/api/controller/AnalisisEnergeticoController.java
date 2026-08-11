@@ -4,10 +4,12 @@ import com.energiai.api.model.dto.request.ConsumoEnergeticoRequest;
 import com.energiai.api.model.dto.response.AnalisisEnergeticoResponse;
 import com.energiai.api.service.AnalisisEnergeticoService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 
 /**
  * EL MOZO DEL SALÓN (REST Controller)
@@ -22,14 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
  * presentado con impecable maestría.
  */
 
-
 @RestController                    // ← etiqueta de la CLASE (una sola vez, arriba de todo)
 public class AnalisisEnergeticoController {
 
     private final AnalisisEnergeticoService service;   // ← acá "guardo" la referencia la chapita o el bordado en el delantal
-                                                       //   la que simpre va a decir el nombre del cocinero!! hasta que finalice el turno
-                                                       //   o en caso de que existan muchos cocineros cada cual es una entidad propia y
-                                                       //   distinta de la otra
+    //   la que simpre va a decir el nombre del cocinero!! hasta que finalice el turno
+    //   o en caso de que existan muchos cocineros cada cual es una entidad propia y
+    //   distinta de la otra
 
     public AnalisisEnergeticoController(AnalisisEnergeticoService service) {  // ← el constructor
         this.service = service;    // ← Spring me la pasa acá, yo la guardo
@@ -46,5 +47,21 @@ public class AnalisisEnergeticoController {
         System.out.println("peakUsageLevel: " + request.getPeakUsageLevel());
 
         return service.analizar(request);
+    }
+
+    /**
+     * MODO SIMULACIÓN DE CAÍDA (Mantenimiento de Emergencia)
+     *
+     * Permite al comensal o al administrador conmutar el estado del servicio en vivo.
+     * Si se activa, el Cocinero Jefe derivará inmediatamente las comandeas al Repostero Ayudante
+     * para poner a prueba la resiliencia del sistema.
+     */
+    @PostMapping("/analisis-energetico/simular-caida")
+    public ResponseEntity<Map<String, Object>> simularCaida() {
+        boolean simulacionActiva = service.toggleSimulacionCaida();
+        return ResponseEntity.ok(Map.of(
+                "simulacionActiva", simulacionActiva,
+                "mensaje", simulacionActiva ? "Simulación de caída ACTIVADA" : "Simulación de caída DESACTIVADA"
+        ));
     }
 }
