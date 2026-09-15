@@ -130,35 +130,6 @@
             flex-wrap: wrap;
         }
 
-        /* TOGGLE DE IDIOMA (ES / EN) */
-        .lang-switch-container {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 2px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: #9AA79E;
-            padding: 4px 10px;
-            border-radius: 16px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .lang-btn.active {
-            background: var(--copper);
-            color: var(--ink);
-            box-shadow: 0 2px 6px rgba(219, 154, 60, 0.4);
-        }
-
         .grid-status {
             display: flex;
             align-items: center;
@@ -662,21 +633,15 @@
             <div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>
             <div class="brand-title">
                 <h1>EnergiAI</h1>
-                <p data-i18n="subtitle">Diagnóstico de eficiencia energética residencial</p>
+                <p>Diagnóstico de eficiencia energética residencial</p>
             </div>
         </div>
 
         <div class="header-right-controls">
-            <!-- SELECTOR DE IDIOMA (ES / EN) -->
-            <div class="lang-switch-container">
-                <button type="button" id="langEsBtn" class="lang-btn active" onclick="switchLanguage('es')">ES</button>
-                <button type="button" id="langEnBtn" class="lang-btn" onclick="switchLanguage('en')">EN</button>
-            </div>
-
             <!-- INTERRUPTOR INTERACTIVO DE SIMULACIÓN DE CAÍDA -->
             <div class="simulation-switch-container" title="Simular desconexión manual del servicio de Python para la demo de resiliencia">
                 <i class="fa-solid fa-power-off"></i>
-                <span data-i18n="simulateDrop">Simular Caída</span>
+                <span>Simular Caída</span>
                 <label class="switch-label">
                     <input type="checkbox" id="simularCaidaToggle">
                     <span class="slider-round"></span>
@@ -702,8 +667,8 @@
             <div class="card-header">
                 <div class="icon-chip"><i class="fa-solid fa-sliders"></i></div>
                 <div>
-                    <div class="eyebrow" data-i18n="step1">Paso 1</div>
-                    <h2 data-i18n="householdParams">Parámetros del hogar</h2>
+                    <div class="eyebrow">Paso 1</div>
+                    <h2>Parámetros del hogar</h2>
                 </div>
             </div>
 
@@ -711,8 +676,8 @@
 
                 <div class="form-group tarifario-group">
                     <label for="tarifaKwh">
-                        <span data-i18n="electricTariff">Tarifa eléctrica ($/kWh)</span>
-                        <span class="badge-empresa" data-i18n="badgeTariff">TARIFA EMPRESA</span>
+                        <span>Tarifa eléctrica ($/kWh)</span>
+                        <span class="badge-empresa">TARIFA EMPRESA</span>
                     </label>
                     <div class="input-wrapper" style="margin-top: 4px;">
                         <i class="fa-solid fa-dollar-sign" style="color: var(--copper-dark);"></i>
@@ -721,7 +686,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="householdSize" data-i18n="householdSize">Personas en la vivienda</label>
+                    <label for="householdSize">Personas en la vivienda</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-user-group"></i>
                         <input type="number" id="householdSize" value="3" min="1" required>
@@ -729,7 +694,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="equipmentCount" data-i18n="equipmentCount">Cantidad de electrodomésticos</label>
+                    <label for="equipmentCount">Cantidad de electrodomésticos</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-plug"></i>
                         <input type="number" id="equipmentCount" value="6" min="0" required>
@@ -737,7 +702,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="consumoTotalMesAnterior" data-i18n="prevMonthConsumption">Consumo mes anterior (kWh)</label>
+                    <label for="consumoTotalMesAnterior">Consumo mes anterior (kWh)</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-chart-line"></i>
                         <input type="number" step="0.1" id="consumoTotalMesAnterior" value="280.5" required>
@@ -745,25 +710,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="peakUsageLevel" data-i18n="peakUsage">Uso en horas pico</label>
+                    <label for="peakUsageLevel">Uso en horas pico</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-clock"></i>
                         <select id="peakUsageLevel">
-                            <option value="LOW" data-i18n="optLow">Bajo</option>
-                            <option value="MEDIUM" data-i18n="optMedium">Medio</option>
-                            <option value="HIGH" selected data-i18n="optHigh">Alto</option>
+                            <option value="LOW">Bajo</option>
+                            <option value="MEDIUM">Medio</option>
+                            <option value="HIGH" selected>Alto</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="housingType" data-i18n="housingType">Tipo de vivienda</label>
+                    <label for="housingType">Tipo de vivienda</label>
                     <div class="input-wrapper">
                         <i class="fa-solid fa-house"></i>
                         <select id="housingType">
-                            <option value="CASA" selected data-i18n="optHouse">Casa</option>
-                            <option value="DEPARTAMENTO" data-i18n="optApartment">Departamento</option>
-                            <option value="MONOAMBIENTE" data-i18n="optStudio">Monoambiente</option>
+                            <option value="CASA" selected>Casa</option>
+                            <option value="DEPARTAMENTO">Departamento</option>
+                            <option value="MONOAMBIENTE">Monoambiente</option>
                         </select>
                     </div>
                 </div>
@@ -771,17 +736,17 @@
                 <div class="checkbox-container">
                     <label class="checkbox-group">
                         <input type="checkbox" id="hasAc" value="1" checked>
-                        <span><i class="fa-solid fa-snowflake"></i> <span data-i18n="hasAc">Posee aire acondicionado</span></span>
+                        <span><i class="fa-solid fa-snowflake"></i> Posee aire acondicionado</span>
                     </label>
                     <label class="checkbox-group">
                         <input type="checkbox" id="homeOffice">
-                        <span><i class="fa-solid fa-laptop-house"></i> <span data-i18n="homeOffice">Trabajo remoto / home office</span></span>
+                        <span><i class="fa-solid fa-laptop-house"></i> Trabajo remoto / home office</span>
                     </label>
                 </div>
 
                 <button type="submit" class="btn-submit">
                     <i class="fa-solid fa-microchip"></i>
-                    <span data-i18n="runBtn">Ejecutar diagnóstico</span>
+                    <span>Ejecutar diagnóstico</span>
                 </button>
             </form>
         </div>
@@ -791,19 +756,19 @@
             <div class="card-header">
                 <div class="icon-chip"><i class="fa-solid fa-gauge-high"></i></div>
                 <div>
-                    <div class="eyebrow" data-i18n="step2">Paso 2</div>
-                    <h2 data-i18n="resultTitle">Resultado del diagnóstico</h2>
+                    <div class="eyebrow">Paso 2</div>
+                    <h2>Resultado del diagnóstico</h2>
                 </div>
             </div>
 
             <div id="placeholder" class="placeholder-state">
                 <div class="dial-ghost"></div>
-                <p data-i18n="placeholderText">Completá los parámetros del hogar y presioná <strong>«Ejecutar diagnóstico»</strong> para consultar al modelo predictivo.</p>
+                <p>Completá los parámetros del hogar y presioná <strong>«Ejecutar diagnóstico»</strong> para consultar al modelo predictivo.</p>
             </div>
 
             <div id="loading" class="spinner-state">
                 <div class="signal-bars"><span></span><span></span><span></span><span></span><span></span></div>
-                <p data-i18n="spinnerText">CONSULTANDO MODELO PREDICTIVO&hellip;</p>
+                <p>CONSULTANDO MODELO PREDICTIVO&hellip;</p>
             </div>
 
             <div id="resultPanel" class="result-hidden">
@@ -820,25 +785,25 @@
                     </svg>
                     <div class="gauge-readout">
                         <div id="categoriaBadge" class="gauge-category">—</div>
-                        <div class="gauge-confidence"><span data-i18n="confidenceLabel">Certeza del modelo:</span> <strong id="probabilidadText">0%</strong></div>
+                        <div class="gauge-confidence">Certeza del modelo: <strong id="probabilidadText">0%</strong></div>
                     </div>
                     <div class="zone-legend">
-                        <span><span class="zone-dot" style="background:var(--sage)"></span><span data-i18n="legEfficient">Eficiente</span></span>
-                        <span><span class="zone-dot" style="background:var(--copper)"></span><span data-i18n="legModerate">Moderado</span></span>
-                        <span><span class="zone-dot" style="background:var(--brick)"></span><span data-i18n="legInefficient">Ineficiente</span></span>
+                        <span><span class="zone-dot" style="background:var(--sage)"></span>Eficiente</span>
+                        <span><span class="zone-dot" style="background:var(--copper)"></span>Moderado</span>
+                        <span><span class="zone-dot" style="background:var(--brick)"></span>Ineficiente</span>
                     </div>
                 </div>
 
                 <div class="metric-strip">
                     <div>
-                        <div class="label" data-i18n="estimatedCostLabel">Costo estimado mensual</div>
+                        <div class="label">Costo estimado mensual</div>
                         <div id="costoValue" class="value">$0.00</div>
                     </div>
                     <i class="fa-solid fa-file-invoice-dollar" style="color:#3E4A42;font-size:1.4rem;"></i>
                 </div>
 
                 <div class="recommendations-section">
-                    <h3><i class="fa-solid fa-lightbulb"></i> <span data-i18n="recommendationsHeader">Recomendaciones del sistema</span></h3>
+                    <h3><i class="fa-solid fa-lightbulb"></i> Recomendaciones del sistema</h3>
                     <ul id="recomendacionesList" class="recommendations-list"></ul>
                 </div>
             </div>
@@ -850,21 +815,18 @@
 
 <footer>
     <div class="footer-container">
-        <!-- Bloque de creditos y enlaces profesionales -->
         <div class="footer-credits">
             <span style="color:#C9D0C8;">
-                ©2026 
+                Developed 💻 by a
                 <a href="https://www.linkedin.com/in/hector-pablo-graff/" target="_blank" rel="noopener noreferrer" style="color:var(--copper); text-decoration:none; font-weight:600;">
-                    <strong>HÉCTOR PABLO GRAFF</strong>
+                    <strong>P4154N0</strong>
                 </a>
-                // BACKEND ENGINEERING LOC: Argentina // TARGET: Calgary, AB (Energy Sector)
+                from 🇦🇷 who takes 🧉 and ❤️ country music 🤠 🎵🎵🎵 🇨🇦
             </span>
-            <!-- Acceso directo al Portfolio -->
             <a href="https://p4154n0.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="footer-tag" style="text-decoration:none;">
                 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.68rem; margin-right:4px;"></i>Portfolio
             </a>
         </div>
-        <!-- Indicador de estado del servicio -->
         <div class="footer-status">
             <div class="status-dot"></div>
             <span>BACKEND API v1.0 · RUNNING</span>
@@ -873,111 +835,6 @@
 </footer>
 
 <script>
-    // DICCIONARIO DE DICCIONARIO INTERNACIONAL (ES / EN)
-    let currentLang = 'es';
-
-    const translations = {
-        es: {
-            subtitle: "Diagnóstico de eficiencia energética residencial",
-            simulateDrop: "Simular Caída",
-            step1: "Paso 1",
-            householdParams: "Parámetros del hogar",
-            electricTariff: "Tarifa eléctrica ($/kWh)",
-            badgeTariff: "TARIFA EMPRESA",
-            householdSize: "Personas en la vivienda",
-            equipmentCount: "Cantidad de electrodomésticos",
-            prevMonthConsumption: "Consumo mes anterior (kWh)",
-            peakUsage: "Uso en horas pico",
-            optLow: "Bajo",
-            optMedium: "Medio",
-            optHigh: "Alto",
-            housingType: "Tipo de vivienda",
-            optHouse: "Casa",
-            optApartment: "Departamento",
-            optStudio: "Monoambiente",
-            hasAc: "Posee aire acondicionado",
-            homeOffice: "Trabajo remoto / home office",
-            runBtn: "Ejecutar diagnóstico",
-            step2: "Paso 2",
-            resultTitle: "Resultado del diagnóstico",
-            placeholderText: "Completá los parámetros del hogar y presioná «Ejecutar diagnóstico» para consultar al modelo predictivo.",
-            spinnerText: "CONSULTANDO MODELO PREDICTIVO…",
-            confidenceLabel: "Certeza del modelo:",
-            legEfficient: "Eficiente",
-            legModerate: "Moderado",
-            legInefficient: "Ineficiente",
-            estimatedCostLabel: "Costo estimado mensual",
-            recommendationsHeader: "Recomendaciones del sistema",
-            apiConnected: "API CONECTADA · ",
-            apiDisconnected: "API DESCONECTADA · MODO FALLBACK",
-            alertTariff: "⚠️ Por favor ingrese una tarifa mayor a 0",
-            noRecs: "Sin recomendaciones adicionales registradas."
-        },
-        en: {
-            subtitle: "Residential energy efficiency diagnostics",
-            simulateDrop: "Simulate Drop",
-            step1: "Step 1",
-            householdParams: "Household Parameters",
-            electricTariff: "Electricity Tariff ($/kWh)",
-            badgeTariff: "UTILITY TARIFF",
-            householdSize: "Household Size (People)",
-            equipmentCount: "Appliance Count",
-            prevMonthConsumption: "Previous Month Consumption (kWh)",
-            peakUsage: "Peak Hours Usage",
-            optLow: "Low",
-            optMedium: "Medium",
-            optHigh: "High",
-            housingType: "Housing Type",
-            optHouse: "House",
-            optApartment: "Apartment",
-            optStudio: "Studio",
-            hasAc: "Has Air Conditioning",
-            homeOffice: "Remote Work / Home Office",
-            runBtn: "Run Diagnostics",
-            step2: "Step 2",
-            resultTitle: "Diagnostic Results",
-            placeholderText: "Complete the household parameters and click \"Run Diagnostics\" to query the predictive model.",
-            spinnerText: "QUERYING PREDICTIVE MODEL…",
-            confidenceLabel: "Model Confidence:",
-            legEfficient: "Efficient",
-            legModerate: "Moderate",
-            legInefficient: "Inefficient",
-            estimatedCostLabel: "Estimated Monthly Cost",
-            recommendationsHeader: "System Recommendations",
-            apiConnected: "API CONNECTED · ",
-            apiDisconnected: "API DISCONNECTED · FALLBACK MODE",
-            alertTariff: "⚠️ Please enter a tariff greater than 0",
-            noRecs: "No additional recommendations recorded."
-        }
-    };
-
-    function switchLanguage(lang) {
-        currentLang = lang;
-        document.getElementById('langEsBtn').classList.toggle('active', lang === 'es');
-        document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                if (el.tagName === 'OPTION') {
-                    el.textContent = translations[lang][key];
-                } else if (el.children.length === 0 || el.querySelector('strong') === null) {
-                    el.textContent = translations[lang][key];
-                }
-            }
-        });
-
-        // Re-render status banner text language
-        const apiStatusText = document.getElementById('apiStatusText');
-        const pulseDot = document.getElementById('pulseDot');
-
-        if (pulseDot.classList.contains('fallback-mode')) {
-            apiStatusText.innerHTML = `${translations[currentLang].apiDisconnected}`;
-        } else {
-            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">AGRARIO</span>`;
-        }
-    }
-
     // EVENTO DEL INTERRUPTOR DE SIMULACIÓN DE CAÍDA
     document.getElementById('simularCaidaToggle').addEventListener('change', async function() {
         try {
@@ -996,7 +853,7 @@
 
         const tarifaInput = parseFloat(document.getElementById('tarifaKwh').value);
         if (isNaN(tarifaInput) || tarifaInput <= 0) {
-            alert(translations[currentLang].alertTariff);
+            alert('⚠️ Por favor ingrese una tarifa mayor a 0');
             return;
         }
 
@@ -1031,7 +888,7 @@
             renderResults(data);
 
         } catch (error) {
-            alert('⚠️ Error:\n' + error.message);
+            alert('⚠️ Error al procesar la solicitud:\n' + error.message);
             document.getElementById('placeholder').style.display = 'block';
         } finally {
             document.getElementById('loading').style.display = 'none';
@@ -1069,10 +926,10 @@
 
         if (fuente === 'MOCK_FALLBACK') {
             pulseDot.classList.add('fallback-mode');
-            apiStatusText.innerHTML = `${translations[currentLang].apiDisconnected}`;
+            apiStatusText.innerHTML = `API DESCONECTADA · <span style="color: var(--brick); font-weight: 600;">MODO FALLBACK</span>`;
         } else {
             pulseDot.classList.remove('fallback-mode');
-            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">AGRARIO</span>`;
+            apiStatusText.innerHTML = `API CONECTADA · <span style="color: var(--copper); font-weight: 600;">AGRARIO</span>`;
         }
 
         const categoria = data.categoria || data.category || 'Sin clasificar';
@@ -1103,7 +960,7 @@
             });
         } else {
             const li = document.createElement('li');
-            li.innerHTML = `<i class="fa-solid fa-circle-info"></i> <span>${translations[currentLang].noRecs}</span>`;
+            li.innerHTML = `<i class="fa-solid fa-circle-info"></i> <span>Sin recomendaciones adicionales registradas.</span>`;
             recList.appendChild(li);
         }
 

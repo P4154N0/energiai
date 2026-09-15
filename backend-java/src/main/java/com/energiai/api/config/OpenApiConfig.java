@@ -12,7 +12,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("AGRARIO - SAME - EnergIAI - API Principal (Backend Java)")
+                        .title("EnergIAI - API Principal (Backend Java)")
                         .version("1.0.0")
                         .description("API REST pública de diagnóstico de eficiencia energética. " +
                                 "Gestiona la validación, orquestación con el servicio de ML y resiliencia con Fallback."));
