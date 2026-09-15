@@ -285,4 +285,10 @@ Proyecto desarrollado en el marco de la simulación laboral de **No Country** ju
 
 ---
 
-Developed 💻 with ❤️ by P4154N0 from 🇦🇷 who takes 🧉 and ❤️ country music 🤠 🇨🇦
+## 👤 Author
+
+Diseñado y desarrollado por **P4154N0 (Héctor Pablo Graff)**.
+
+Ingeniero de software especializado en sistemas distribuidos y arquitecturas de telemetría. Actualmente radicado en Argentina, con el objetivo profesional de aportar valor tecnológico a los sectores energético e industrial en Calgary, Alberta (Canadá).
+
+🔗 **[LinkedIn](https://www.linkedin.com/in/hector-pablo-graff/)** | 💻 **[Portfolio](https://p4154n0.github.io/portfolio/)**
