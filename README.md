@@ -4,7 +4,7 @@
 
 ### Análisis Inteligente de Consumo Energético Residencial
 
-*Transformamos datos crudos de consumo eléctrico en decisiones más sostenibles.*
+*Transformamos datos de consumo eléctrico en información útil para tomar decisiones más sostenibles.*
 
 [![Java](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)](#-tecnologías)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-brightgreen?logo=springboot)](#-tecnologías)
@@ -12,7 +12,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-ML%20Service-009688?logo=fastapi)](#-tecnologías)
 [![OCI](https://img.shields.io/badge/Oracle%20Cloud-Infrastructure-F80000?logo=oracle)](#️-arquitectura-de-infraestructura-oci)
 [![Hackathon](https://img.shields.io/badge/Hackathon-ONE%20G9%20LATAM-purple)](https://alura-es-cursos.github.io/proyectos-hackathon-g9-latam/)
-[![Status](https://img.shields.io/badge/status-MVP%20Production%20Ready-brightgreen)](#-estado-del-proyecto)
+[![Status](https://img.shields.io/badge/status-MVP%20operativo-brightgreen)](#-estado-del-proyecto)
 
 </div>
 
@@ -35,20 +35,26 @@
 - [Cómo ejecutar el proyecto](#ejecucion)
 - [Documentación Técnica](#documentacion-tecnica)
 - [Créditos](#créditos)
+- [Autor](#autor)
+- [Licencia](#licencia)
 
 ---
 
 <a id="descripción"></a>
 ## 📋 Descripción
 
-**EnergIAi** es una plataforma integral que analiza el consumo eléctrico residencial mediante Inteligencia Artificial y reglas de negocio adaptativas. A partir de parámetros como el consumo mensual, cantidad de electrodomésticos, rutina en horario pico y tarifa contratada, la solución:
+**EnergIAi** es una plataforma de análisis energético residencial que combina **Inteligencia Artificial, reglas de negocio y una arquitectura backend resiliente** para transformar datos de consumo eléctrico en información accionable.
 
-- Clasifica el perfil energético de una vivienda (**Eficiente**, **Moderado** o **Ineficiente**).
-- Genera recomendaciones concretas y personalizadas para reducir el desperdicio energético.
-- Estima el impacto financiero mensual en tiempo real mediante una **tarifa eléctrica configurable ($/kWh)**.
-- Implementa una arquitectura resiliente con **patrón Fallback** y observabilidad en la interfaz en tiempo real.
+A partir de parámetros como el consumo mensual, cantidad de electrodomésticos, hábitos durante horarios pico y tarifa eléctrica, la solución permite:
 
-Proyecto ideado originalmente para el **Hackathon ONE — Proyectos G9 | Alura + Oracle**, dentro del track *Sostenibilidad, Energía y Casas Inteligentes*.
+- Clasificar el perfil energético de una vivienda como **Eficiente, Moderado o Ineficiente**.
+- Generar recomendaciones orientadas a reducir el desperdicio energético.
+- Estimar el impacto económico mensual mediante una **tarifa configurable ($/kWh)**.
+- Integrar un modelo de Machine Learning mediante un microservicio independiente.
+- Mantener la disponibilidad funcional mediante una estrategia de **Fallback** ante fallos del servicio de IA.
+- Exponer información de observabilidad directamente en la interfaz de usuario.
+
+El proyecto fue desarrollado originalmente para el **Hackathon ONE — Proyectos G9 | Alura + Oracle**, dentro del track **Sostenibilidad, Energía y Casas Inteligentes**.
 
 ---
 
@@ -68,11 +74,14 @@ Proyecto ideado originalmente para el **Hackathon ONE — Proyectos G9 | Alura +
 <a id="problema-y-necesidad"></a>
 ## 🧩 Problema y Necesidad
 
-Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender qué hábitos o equipos generan dicho impacto. **EnergIAi** transforma datos crudos de consumo en diagnóstico claro e interactivo, permitiendo:
+El consumo eléctrico residencial puede generar costos elevados sin que el usuario tenga una visión clara de qué hábitos o características de su vivienda están relacionados con ese consumo.
 
-1. Visibilidad directa del costo mensual estimado en función de la tarifa contratada.
-2. Identificación inmediata de ineficiencias de consumo.
-3. Recomendaciones automatizadas orientadas al ahorro y consumo consciente.
+**EnergIAi** busca convertir datos de entrada en un diagnóstico sencillo e interactivo mediante:
+
+1. Visualización del costo mensual estimado según la tarifa configurada.
+2. Clasificación del perfil energético.
+3. Identificación de posibles ineficiencias.
+4. Recomendaciones automatizadas orientadas al ahorro y al consumo responsable.
 
 ---
 
@@ -83,7 +92,7 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 * **Internacionalización Nativa (i18n):** Interfaz bilingüe (**Español / Inglés**) conmutable en tiempo real sin recargar la página.
 * **Inyección de Fallas & Resiliencia (Kill Switch):** Incluye un interruptor en cabecera (*Simular Caída*) que intercepta la solicitud y fuerza el flujo hacia el cliente `MlModelClientMock` para probar la tolerancia a fallos en vivo.
 * **Observabilidad Visual Reactiva:** El frontend detecta el origen de los datos (`IA_PYTHON_REAL` vs `MOCK_FALLBACK`) y conmuta automáticamente el indicador de la cabecera:
-  * 🟢 `API CONECTADA · AGRARIO` (Respuesta real servida por el modelo en Python).
+  * 🟢 `API CONECTADA · IA REAL` (Respuesta real servida por el modelo en Python).
   * 🔴 `API DESCONECTADA · MODO FALLBACK` (Respuesta de contingencia por simulación o caída de red).
 
 ---
@@ -163,9 +172,11 @@ El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** 
 ---
 
 <a id="benchmarking"></a>
-## ⚡ Pruebas de Carga, Rendimiento y Elasticidad (Benchmarking)
+## ⚡ Pruebas de Carga, Rendimiento (Benchmarking)
 
-Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga destructiva y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
+Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
+
+El objetivo fue observar el comportamiento de los endpoints bajo carga y verificar métricas de latencia, errores y utilización de recursos.
 
 ---
 
@@ -209,11 +220,48 @@ Para garantizar un estándar de producción real, la API desplegada en **Oracle 
 <a id="tecnologías"></a>
 ## 🛠️ Tecnologías
 
-* **Backend Core:** Java 21 LTS + Spring Boot 3.3.x + Jakarta Validation.
-* **Microservicio ML:** Python 3.12 + FastAPI + Scikit-Learn + Uvicorn.
-* **Frontend:** HTML5 + CSS3 (Custom Properties & Keyframes) + JavaScript Vanilla.
-* **Infraestructura Cloud:** Oracle Cloud Infrastructure (OCI Compute, VCN, Security Rules).
-* **Metodología y Control:** Git, Conventional Commits, OpenAPI/Swagger.
+### Backend
+
+- **Java 21 LTS**
+- **Spring Boot 3.3.x**
+- **Jakarta Bean Validation**
+- Arquitectura por capas
+- REST APIs
+- Patrón Fallback
+
+### Machine Learning
+
+- **Python 3.12**
+- **FastAPI**
+- **Scikit-Learn**
+- **Uvicorn**
+- Modelo serializado mediante `.pkl`
+
+### Frontend
+
+- **HTML5**
+- **CSS3**
+- **JavaScript Vanilla**
+- CSS Custom Properties
+- CSS Keyframes
+
+### Cloud & Infraestructura
+
+- **Oracle Cloud Infrastructure (OCI)**
+- OCI Compute
+- VCN
+- Security Lists
+- **Linux / Ubuntu**
+- `iptables`
+- `systemd`
+
+### Testing & Engineering
+
+- **Grafana k6**
+- **Postman**
+- **OpenAPI / Swagger**
+- **Git**
+- **Conventional Commits**
 
 ---
 
@@ -225,17 +273,48 @@ El modelo predictivo fue entrenado utilizando el dataset público **[Household E
 ---
 
 <a id="equipo"></a>
-## 👥 Atribución de Roles y Equipo
+## 👥 Equipo y Atribución de Roles
 
-* **[Jonathan Marino](https://www.linkedin.com/in/jonathan-marino/):** Exploración, curado y limpieza del dataset (EDA).
-* **[Hernán Pérez Melgar](https://www.linkedin.com/in/hernan-perez-melgar-320088184/):** Entrenamiento y evaluación del modelo de clasificación (`.pkl`).
-* **[Héctor Pablo Graff (P4154N0)](https://www.linkedin.com/in/hector-pablo-graff/):** **Ingeniería de Software & Desarrollo Integral End-to-End**
-  * Arquitectura del Backend Core en Java 21 / Spring Boot 3.3.x (DTOs, Validaciones, Estrategia de Fallback).
-  * Microservicio de Inferencia de ML en Python / FastAPI.
-  * Arquitectura, despliegue y hardening de infraestructura en Oracle Cloud Infrastructure (OCI).
-  * **Pruebas de Carga, Estrés y Benchmarking (Grafana k6):** Diseño de la suite de stress testing, auditoría de métricas de SLA ($p(95) < 75\text{ ms}$) y observabilidad de hardware (`htop`) en la nube.
-  * Diseño y desarrollo de la Interfaz Frontend, velocímetro dinámico, tarifa configurable y observabilidad visual del estado de API en tiempo real.
-* **Soporte Colaborativo / Integrantes:** Agustina Lerda, Annie Lehmann, Frank Mijhael Bendezu Hinostroza.
+### Jonathan Marino
+
+Exploración, curado y limpieza del dataset mediante análisis exploratorio de datos (EDA).
+
+[LinkedIn](https://www.linkedin.com/in/jonathan-marino/)
+
+### Hernán Pérez Melgar
+
+Entrenamiento y evaluación del modelo de clasificación y generación del modelo serializado (`.pkl`).
+
+[LinkedIn](https://www.linkedin.com/in/hernan-perez-melgar-320088184/)
+
+### Héctor Pablo Graff — P4154N0
+
+**Ingeniería de Software & Desarrollo Integral End-to-End**
+
+Responsabilidades principales:
+
+- Diseño y desarrollo del **Backend Core** con Java 21 / Spring Boot 3.3.x.
+- Implementación de DTOs, validaciones y reglas de negocio.
+- Diseño e implementación de la **estrategia Fallback**.
+- Desarrollo del microservicio de inferencia ML con **Python / FastAPI**.
+- Diseño de la arquitectura de integración entre Java, Python y el modelo predictivo.
+- Diseño, despliegue y hardening de infraestructura en **Oracle Cloud Infrastructure (OCI)**.
+- Diseño y ejecución de pruebas de carga y estrés con **Grafana k6**.
+- Análisis de métricas de latencia, errores y utilización de recursos.
+- Monitoreo de infraestructura mediante `htop`.
+- Diseño y desarrollo del frontend.
+- Implementación del velocímetro dinámico.
+- Implementación de tarifa configurable.
+- Implementación de internacionalización ES / EN.
+- Implementación de indicadores visuales de observabilidad y estado de API.
+
+[LinkedIn](https://www.linkedin.com/in/hector-pablo-graff/)
+
+### Soporte Colaborativo
+
+- Agustina Lerda
+- Annie Lehmann
+- Frank Mijhael Bendezu Hinostroza
 
 ---
 
@@ -245,7 +324,7 @@ El modelo predictivo fue entrenado utilizando el dataset público **[Household E
 ### 1. Clonar el repositorio
 
 ```bash
-git clone [https://github.com/P4154N0/energiai.git](https://github.com/P4154N0/energiai.git)
+git clone https://github.com/P4154N0/energiai.git
 cd energiai
 ```
 ---
@@ -285,10 +364,21 @@ Proyecto desarrollado en el marco de la simulación laboral de **No Country** ju
 
 ---
 
-## 👤 Author
+## 👤 Autor
 
 Diseñado y desarrollado por **P4154N0 (Héctor Pablo Graff)**.
 
-Ingeniero de software especializado en sistemas distribuidos y arquitecturas de telemetría. Actualmente radicado en Argentina, con el objetivo profesional de aportar valor tecnológico a los sectores energético e industrial en Calgary, Alberta (Canadá).
+**Ingeniero de software especializado en sistemas distribuidos y arquitecturas de telemetría.** Actualmente radicado en Argentina, con el objetivo profesional de aportar valor tecnológico a los **sectores energético e industrial** en Calgary, Alberta, Canadá.
 
-🔗 **[LinkedIn](https://www.linkedin.com/in/hector-pablo-graff/)** | 💻 **[Portfolio](https://p4154n0.github.io/portfolio/)**
+🔗 [**LinkedIn**](https://www.linkedin.com/in/hector-pablo-graff/)  
+💻 [**Portfolio**](https://p4154n0.github.io/portfolio/)
+
+---
+
+## 📄 Licencia
+
+El código fuente de este proyecto se encuentra bajo la licencia **MIT**.
+
+Consulta el archivo [**LICENSE**](./LICENSE) para conocer los términos completos.
+
+El contenido personal, materiales de presentación y recursos de terceros no están cubiertos por la licencia MIT salvo que se indique expresamente lo contrario.
