@@ -125,31 +125,25 @@ Muchos usuarios residenciales reciben facturas eléctricas elevadas sin entender
 <a id="arquitectura-sistema"></a>
 ## 🏗️ Arquitectura del Sistema
 
-```text
-               Usuario / Navegador
-                        │
-                        ▼
-             Interfaz Web (HTML5/JS)
-                        │
-                    HTTP POST
-                        ▼
-          API Principal Java (Spring Boot)
-            Oracle Cloud (VM Pública)
-                        │
-          ┌─────────────┴─────────────┐
-   (Conexión OK)               (Error / Red caída)
-          │                           │
-          ▼                           ▼
-  API ML (FastAPI)            MlModelClientMock
-    Oracle Cloud                 (Resiliencia)
-          │                           │
-          ▼                           │
-   Modelo (.pkl)                      │
-          └─────────────┬─────────────┘
-                        │
-                        ▼
-           AnalisisEnergeticoResponse
-        (Metadatos de Observabilidad)
+```mermaid
+graph TD
+    A["Usuario / Navegador"] -->|"HTTP POST"| B["API Principal Java (Spring Boot)<br/>Oracle Cloud (VM Pública)"]
+    
+    B --> C{"¿Estado de Conexión con VM Python?"}
+    
+    C -->|"Conexión OK"| D["API ML (FastAPI)<br/>Oracle Cloud"]
+    C -->|"Error / Red Caída"| E["MlModelClientMock<br/>(Modo Resiliencia Offline-First)"]
+    
+    D --> F["Modelo Predictivo (.pkl)"]
+    
+    F --> G["AnalisisEnergeticoResponse<br/>(Metadatos de Observabilidad)"]
+    E --> G
+
+    style B fill:#f97316,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#3b82f6,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#10b981,stroke:#333,stroke-width:2px,color:#fff
+    style E fill:#64748b,stroke:#333,stroke-width:2px,color:#fff
+    style G fill:#8b5cf6,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 ---
