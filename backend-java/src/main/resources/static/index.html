@@ -910,6 +910,7 @@
             recommendationsHeader: "Recomendaciones del sistema",
             apiConnected: "API CONECTADA · ",
             apiDisconnected: "API DESCONECTADA · MODO FALLBACK",
+            aiRealBadge: "AI REAL",
             alertTariff: "⚠️ Por favor ingrese una tarifa mayor a 0",
             noRecs: "Sin recomendaciones adicionales registradas."
         },
@@ -946,6 +947,7 @@
             recommendationsHeader: "System Recommendations",
             apiConnected: "API CONNECTED · ",
             apiDisconnected: "API DISCONNECTED · FALLBACK MODE",
+            aiRealBadge: "REAL AI",
             alertTariff: "⚠️ Please enter a tariff greater than 0",
             noRecs: "No additional recommendations recorded."
         }
@@ -974,7 +976,7 @@
         if (pulseDot.classList.contains('fallback-mode')) {
             apiStatusText.innerHTML = `${translations[currentLang].apiDisconnected}`;
         } else {
-            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">REAL AI</span>`;
+            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">${translations[currentLang].aiRealBadge}</span>`;
         }
     }
 
@@ -1072,7 +1074,7 @@
             apiStatusText.innerHTML = `${translations[currentLang].apiDisconnected}`;
         } else {
             pulseDot.classList.remove('fallback-mode');
-            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">AGRARIO</span>`;
+            apiStatusText.innerHTML = `${translations[currentLang].apiConnected}<span style="color: var(--copper); font-weight: 600;">${translations[currentLang].aiRealBadge}</span>`;
         }
 
         const categoria = data.categoria || data.category || 'Sin clasificar';
