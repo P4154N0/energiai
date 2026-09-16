@@ -2,150 +2,152 @@
 
 # ⚡ EnergIAi
 
-### Análisis Inteligente de Consumo Energético Residencial
+### Smart Residential Energy Consumption Analysis
 
-*Transformamos datos de consumo eléctrico en información útil para tomar decisiones más sostenibles.*
+🇪🇸 [Español](README_es.md)
 
-[![Java](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)](#-tecnologías)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-brightgreen?logo=springboot)](#-tecnologías)
-[![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](#-tecnologías)
-[![FastAPI](https://img.shields.io/badge/FastAPI-ML%20Service-009688?logo=fastapi)](#-tecnologías)
-[![OCI](https://img.shields.io/badge/Oracle%20Cloud-Infrastructure-F80000?logo=oracle)](#️-arquitectura-de-infraestructura-oci)
+*We turn electricity consumption data into useful information for making more sustainable decisions.*
+
+[![Java](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)](#-technologies)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-brightgreen?logo=springboot)](#-technologies)
+[![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](#-technologies)
+[![FastAPI](https://img.shields.io/badge/FastAPI-ML%20Service-009688?logo=fastapi)](#-technologies)
+[![OCI](https://img.shields.io/badge/Oracle%20Cloud-Infrastructure-F80000?logo=oracle)](#️-oci-infrastructure-architecture)
 [![Hackathon](https://img.shields.io/badge/Hackathon-ONE%20G9%20LATAM-purple)](https://alura-es-cursos.github.io/proyectos-hackathon-g9-latam/)
-[![Status](https://img.shields.io/badge/status-MVP%20operativo-brightgreen)](#-estado-del-proyecto)
+[![Status](https://img.shields.io/badge/status-Operational%20MVP-brightgreen)](#-project-status)
 
 </div>
 
 ---
 
-## 📖 Índice
+## 📖 Table of Contents
 
-- [Descripción](#descripción)
-- [Estado del proyecto](#estado-del-proyecto)
-- [Problema y Necesidad](#problema-y-necesidad)
-- [Características Clave](#características-clave)
-- [Interfaz de Usuario y Observabilidad](#interfaz)
-- [Arquitectura del Sistema](#arquitectura-sistema)
-- [Arquitectura de Infraestructura (OCI)](#arquitectura-oci)
-- [Pruebas de Carga y Rendimiento (Benchmarking)](#benchmarking)
-- [Componentes del Proyecto](#componentes)
-- [Tecnologías](#tecnologías)
+- [Description](#description)
+- [Project Status](#project-status)
+- [Problem and Need](#problem-and-need)
+- [Key Features](#key-features)
+- [User Interface and Observability](#interface)
+- [System Architecture](#system-architecture)
+- [Infrastructure Architecture (OCI)](#oci-architecture)
+- [Load and Performance Testing (Benchmarking)](#benchmarking)
+- [Project Components](#components)
+- [Technologies](#technologies)
 - [Dataset](#dataset)
-- [Atribución de Roles y Equipo](#equipo)
-- [Cómo ejecutar el proyecto](#ejecucion)
-- [Documentación Técnica](#documentacion-tecnica)
-- [Créditos](#créditos)
-- [Autor](#autor)
-- [Licencia](#licencia)
+- [Team and Role Attribution](#team)
+- [How to Run the Project](#execution)
+- [Technical Documentation](#technical-documentation)
+- [Credits](#credits)
+- [Author](#author)
+- [License](#license)
 
 ---
 
-<a id="descripción"></a>
-## 📋 Descripción
+<a id="description"></a>
+## 📋 Description
 
-**EnergIAi** es una plataforma de análisis energético residencial que combina **Inteligencia Artificial, reglas de negocio y una arquitectura backend resiliente** para transformar datos de consumo eléctrico en información accionable.
+**EnergIAi** is a residential energy analysis platform that combines **Artificial Intelligence, business rules, and a resilient backend architecture** to turn electricity consumption data into actionable information.
 
-A partir de parámetros como el consumo mensual, cantidad de electrodomésticos, hábitos durante horarios pico y tarifa eléctrica, la solución permite:
+Based on parameters such as monthly consumption, number of appliances, habits during peak hours, and electricity rate, the solution allows you to:
 
-- Clasificar el perfil energético de una vivienda como **Eficiente, Moderado o Ineficiente**.
-- Generar recomendaciones orientadas a reducir el desperdicio energético.
-- Estimar el impacto económico mensual mediante una **tarifa configurable ($/kWh)**.
-- Integrar un modelo de Machine Learning mediante un microservicio independiente.
-- Mantener la disponibilidad funcional mediante una estrategia de **Fallback** ante fallos del servicio de IA.
-- Exponer información de observabilidad directamente en la interfaz de usuario.
+- Classify a home's energy profile as **Efficient, Moderate, or Inefficient**.
+- Generate recommendations aimed at reducing energy waste.
+- Estimate the monthly financial impact using a **configurable rate ($/kWh)**.
+- Integrate a Machine Learning model through an independent microservice.
+- Maintain functional availability through a **Fallback** strategy in the event of AI service failures.
+- Expose observability information directly in the user interface.
 
-El proyecto fue desarrollado originalmente para el **Hackathon ONE — Proyectos G9 | Alura + Oracle**, dentro del track **Sostenibilidad, Energía y Casas Inteligentes**.
+The project was originally developed for the **ONE Hackathon — G9 Projects | Alura + Oracle**, within the **Sustainability, Energy, and Smart Homes** track.
 
 ---
 
-<a id="estado-del-proyecto"></a>
-## 🚦 Estado del Proyecto
+<a id="project-status"></a>
+## 🚦 Project Status
 
-| Componente | Estado |
+| Component | Status |
 |---|---|
-| **Infraestructura OCI** (VCN, Subred, Security Lists, 2 VMs Compute) | ✅ Desplegada y operativa |
-| **API de Machine Learning** (Python 3.12 / FastAPI) | ✅ Desplegada en OCI como servicio `systemd` |
-| **Modelo de Clasificación** (`.pkl`) | ✅ Entrenado, evaluado y servido en producción |
-| **Backend Principal** (Java 21 LTS / Spring Boot 3.3.x) | ✅ 100% Funcional — Arquitectura por capas, Bean Validation y Fallback |
-| **Frontend & Interfaz de Usuario** (HTML5 / CSS3 / Vanilla JS) | ✅ 100% Funcional — Velocímetro dinámico, Tarifa configurable e indicador visual de estado |
+| **OCI Infrastructure** (VCN, Subnet, Security Lists, 2 Compute VMs) | ✅ Deployed and operational |
+| **Machine Learning API** (Python 3.12 / FastAPI) | ✅ Deployed on OCI as a `systemd` service |
+| **Classification Model** (`.pkl`) | ✅ Trained, evaluated, and served in production |
+| **Main Backend** (Java 21 LTS / Spring Boot 3.3.x) | ✅ 100% Functional — Layered architecture, Bean Validation, and Fallback |
+| **Frontend & User Interface** (HTML5 / CSS3 / Vanilla JS) | ✅ 100% Functional — Dynamic gauge, configurable rate, and visual status indicator |
 
 ---
 
-<a id="problema-y-necesidad"></a>
-## 🧩 Problema y Necesidad
+<a id="problem-and-need"></a>
+## 🧩 Problem and Need
 
-El consumo eléctrico residencial puede generar costos elevados sin que el usuario tenga una visión clara de qué hábitos o características de su vivienda están relacionados con ese consumo.
+Residential electricity consumption can lead to high costs without the user having a clear view of which habits or home characteristics are related to that consumption.
 
-**EnergIAi** busca convertir datos de entrada en un diagnóstico sencillo e interactivo mediante:
+**EnergIAi** aims to turn input data into a simple, interactive diagnosis through:
 
-1. Visualización del costo mensual estimado según la tarifa configurada.
-2. Clasificación del perfil energético.
-3. Identificación de posibles ineficiencias.
-4. Recomendaciones automatizadas orientadas al ahorro y al consumo responsable.
-
----
-
-<a id="características-clave"></a>
-## ✨ Características Clave
-
-* **Tarifa Configurable ($/kWh):** Cálculo financiero adaptativo según el valor por unidad ingresado por el usuario o empresa.
-* **Internacionalización Nativa (i18n):** Interfaz bilingüe (**Español / Inglés**) conmutable en tiempo real sin recargar la página.
-* **Inyección de Fallas & Resiliencia (Kill Switch):** Incluye un interruptor en cabecera (*Simular Caída*) que intercepta la solicitud y fuerza el flujo hacia el cliente `MlModelClientMock` para probar la tolerancia a fallos en vivo.
-* **Observabilidad Visual Reactiva:** El frontend detecta el origen de los datos (`IA_PYTHON_REAL` vs `MOCK_FALLBACK`) y conmuta automáticamente el indicador de la cabecera:
-  * 🟢 `API CONECTADA · IA REAL` (Respuesta real servida por el modelo en Python).
-  * 🔴 `API DESCONECTADA · MODO FALLBACK` (Respuesta de contingencia por simulación o caída de red).
+1. Visualization of the estimated monthly cost based on the configured rate.
+2. Classification of the energy profile.
+3. Identification of possible inefficiencies.
+4. Automated recommendations aimed at savings and responsible consumption.
 
 ---
 
-<a id="interfaz"></a>
-## 📸 Interfaz de Usuario y Observabilidad
+<a id="key-features"></a>
+## ✨ Key Features
 
-### 1. Clasificación del Perfil Energético y Soporte Bilingüe (ES / EN)
+* **Configurable Rate ($/kWh):** Adaptive financial calculation based on the unit price entered by the user or company.
+* **Native Internationalization (i18n):** Bilingual interface (**Spanish / English**) switchable in real time without reloading the page.
+* **Fault Injection & Resilience (Kill Switch):** Includes a header toggle (*Simulate Outage*) that intercepts the request and forces the flow toward the `MlModelClientMock` client to test fault tolerance live.
+* **Reactive Visual Observability:** The frontend detects the origin of the data (`IA_PYTHON_REAL` vs `MOCK_FALLBACK`) and automatically switches the header indicator:
+  * 🟢 `API CONNECTED · REAL AI` (Real response served by the Python model).
+  * 🔴 `API DISCONNECTED · FALLBACK MODE` (Contingency response due to simulation or network failure).
 
-| 🟢 Perfil Eficiente | 🟡 Perfil Moderado | 🔴 Perfil Ineficiente |
+---
+
+<a id="interface"></a>
+## 📸 User Interface and Observability
+
+### 1. Energy Profile Classification and Bilingual Support (ES / EN)
+
+| 🟢 Efficient Profile | 🟡 Moderate Profile | 🔴 Inefficient Profile |
 |:---:|:---:|:---:|
-| ![Perfil Eficiente](docs/images/eficiente.png) | ![Perfil Moderado](docs/images/moderado.png) | ![Perfil Ineficiente](docs/images/ineficiente.png) |
-| *Consumo optimizado con bajo impacto financiero.* | *Consumo dentro del promedio con margen de mejora.* | *Consumo elevado con alertas y recomendaciones de ahorro.* |
+| ![Efficient Profile](docs/images/eficiente.png) | ![Moderate Profile](docs/images/moderado.png) | ![Inefficient Profile](docs/images/ineficiente.png) |
+| *Optimized consumption with low financial impact.* | *Consumption within the average with room for improvement.* | *High consumption with alerts and savings recommendations.* |
 
-> 🌐 **Internacionalización:** Toda la interfaz y el diagnósticos son conmutables en tiempo real entre **Español (ES)** e **Inglés (EN)** en un solo clic.
+> 🌐 **Internationalization:** The entire interface and diagnostics are switchable in real time between **Spanish (ES)** and **English (EN)** with a single click.
 
 ---
 
-### 2. Observabilidad y Resiliencia en Tiempo Real (Kill Switch & Fallback)
+### 2. Real-Time Observability and Resilience (Kill Switch & Fallback)
 
-| 🟢 Operación Normal (`IA_PYTHON_REAL`) | 🔴 Simulación de Caída Activa (`MOCK_FALLBACK`) |
+| 🟢 Normal Operation (`IA_PYTHON_REAL`) | 🔴 Active Outage Simulation (`MOCK_FALLBACK`) |
 |:---:|:---:|
-| ![API Conectada](docs/images/eficiente.png) | ![Modo Fallback](docs/images/mock.png) |
-| *Inferencia servida en tiempo real por el microservicio en Python.* | *Respuesta de contingencia forzada desde el Toggle de Simulación.* |
+| ![API Connected](docs/images/eficiente.png) | ![Fallback Mode](docs/images/mock.png) |
+| *Inference served in real time by the Python microservice.* | *Contingency response forced from the Simulation Toggle.* |
 
 ---
 
-### 🎬 Demostración en Vivo (Live Demo)
+### 🎬 Live Demo
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=ID_DE_TU_VIDEO" target="_blank">
-    <img src="https://img.youtube.com/vi/ID_DE_TU_VIDEO/maxresdefault.jpg" alt="Ver Demo en YouTube" width="85%" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <img src="https://img.youtube.com/vi/ID_DE_TU_VIDEO/maxresdefault.jpg" alt="Watch Demo on YouTube" width="85%" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
   </a>
-  <p><em>▶️ Haz clic en la imagen para ver la demostración interactiva en YouTube (Prueba de Kill Switch y conmutación ES/EN).</em></p>
+  <p><em>▶️ Click the image to watch the interactive demo on YouTube (Kill Switch test and ES/EN switching).</em></p>
 </div>
 
 ---
 
-<a id="arquitectura-sistema"></a>
-## 🏗️ Arquitectura del Sistema
+<a id="system-architecture"></a>
+## 🏗️ System Architecture
 
 ```mermaid
 graph TD
-    A["Usuario / Navegador"] -->|"HTTP POST"| B["API Principal Java (Spring Boot)<br/>Oracle Cloud (VM Pública)"]
+    A["User / Browser"] -->|"HTTP POST"| B["Main Java API (Spring Boot)<br/>Oracle Cloud (Public VM)"]
     
-    B --> C{"¿Estado de Conexión con VM Python?"}
+    B --> C{"Connection Status with Python VM?"}
     
-    C -->|"Conexión OK"| D["API ML (FastAPI)<br/>Oracle Cloud"]
-    C -->|"Error / Red Caída"| E["MlModelClientMock<br/>(Modo Resiliencia Offline-First)"]
+    C -->|"Connection OK"| D["ML API (FastAPI)<br/>Oracle Cloud"]
+    C -->|"Error / Network Down"| E["MlModelClientMock<br/>(Offline-First Resilience Mode)"]
     
-    D --> F["Modelo Predictivo (.pkl)"]
+    D --> F["Predictive Model (.pkl)"]
     
-    F --> G["AnalisisEnergeticoResponse<br/>(Metadatos de Observabilidad)"]
+    F --> G["AnalisisEnergeticoResponse<br/>(Observability Metadata)"]
     E --> G
 
     style B fill:#f97316,stroke:#333,stroke-width:2px,color:#fff
@@ -157,77 +159,77 @@ graph TD
 
 ---
 
-<a id="arquitectura-oci"></a>
-## ☁️ Arquitectura de Infraestructura (OCI)
+<a id="oci-architecture"></a>
+## ☁️ Infrastructure Architecture (OCI)
 
-El proyecto se encuentra alojado en **Oracle Cloud Infrastructure (Free Tier)** en la región Brazil East (São Paulo):
+The project is hosted on **Oracle Cloud Infrastructure (Free Tier)** in the Brazil East (São Paulo) region:
 
-| Máquina | Rol | IP pública | IP privada | Puerto | Estado |
+| Machine | Role | Public IP | Private IP | Port | Status |
 |---|---|---|---|---|---|
-| **VM Java** | Backend Principal (Spring Boot 3.3.x) | `163.176.43.143` | `10.0.0.213` | 8080 | ✅ Operativa |
-| **VM Python** | Inferencia ML (FastAPI + `.pkl`) | `147.15.16.156` | `10.0.0.164` | 8000 | ✅ Operativa (systemd) |
+| **Java VM** | Main Backend (Spring Boot 3.3.x) | `163.176.43.143` | `10.0.0.213` | 8080 | ✅ Operational |
+| **Python VM** | ML Inference (FastAPI + `.pkl`) | `147.15.16.156` | `10.0.0.164` | 8000 | ✅ Operational (systemd) |
 
-*Nota de Seguridad:* La comunicación hacia la VM de Python está restringida mediante **Security Lists de OCI** e `iptables`, permitiendo tráfico al puerto 8000 únicamente desde la subred interna (`10.0.0.0/24`).
+*Security Note:* Communication with the Python VM is restricted via **OCI Security Lists** and `iptables`, allowing traffic on port 8000 only from the internal subnet (`10.0.0.0/24`).
 
 ---
 
 <a id="benchmarking"></a>
-## ⚡ Pruebas de Carga, Rendimiento (Benchmarking)
+## ⚡ Load and Performance Testing (Benchmarking)
 
-Para garantizar un estándar de producción real, la API desplegada en **Oracle Cloud Infrastructure (OCI)** fue sometida a pruebas de carga y concurrencia utilizando **Grafana k6**, monitoreando en tiempo real la salud del hardware (`htop`) en la Virtual Machine Ubuntu.
+To ensure a genuine production standard, the API deployed on **Oracle Cloud Infrastructure (OCI)** was subjected to load and concurrency testing using **Grafana k6**, while monitoring hardware health in real time (`htop`) on the Ubuntu Virtual Machine.
 
-El objetivo fue observar el comportamiento de los endpoints bajo carga y verificar métricas de latencia, errores y utilización de recursos.
+The goal was to observe endpoint behavior under load and verify latency, error, and resource utilization metrics.
 
 ---
 
-### 🏥 1. Diagnóstico de Infraestructura (`GET /health`)
-* **Concurrencia Probada:** Ráfagas de hasta **30 usuarios virtuales (VUs)** simultáneos.
-* **Elasticidad de Procesador:** La JVM despertó los núcleos bajo demanda pasando de **0.7% a 27.2% de CPU**, retornando al estado basal inmediatamente al finalizar.
-* **Métrica SLA:** Latencia **$p(95) = 57.37\text{ ms}$** y **0.00% tasa de fallos** sobre 1,687 peticiones.
+### 🏥 1. Infrastructure Diagnostics (`GET /health`)
+* **Concurrency Tested:** Bursts of up to **30 simultaneous virtual users (VUs)**.
+* **CPU Elasticity:** The JVM woke up cores on demand, going from **0.7% to 27.2% CPU usage**, and returning to baseline immediately after finishing.
+* **SLA Metric:** Latency **$p(95) = 57.37\text{ ms}$** and **0.00% failure rate** over 1,687 requests.
 
-| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (30 VUs) | 🟢 3. Reporte Final (`k6`) |
+| 🟢 1. Initial State (Baseline) | 🟡 2. Load Peak (30 VUs) | 🟢 3. Final Report (`k6`) |
 |:---:|:---:|:---:|
 | ![Health Baseline](./backend-java/k6/images/health/health-htop-baseline.png) | ![Health CPU Peak](./backend-java/k6/images/health/health-htop-cpu-peak.png) | ![Health Metrics](./backend-java/k6/images/health/health-k6-metrics-verde.png) |
-| *Servidor en reposo (0.7% CPU, ~420 MB RAM).* | *Escalado elástico de CPU sin degradar la memoria.* | *1,00% de éxito, 0% errores y $p(95) < 58\text{ ms}$.* |
+| *Server at rest (0.7% CPU, ~420 MB RAM).* | *Elastic CPU scaling without degrading memory.* | *100% success rate, 0% errors, and $p(95) < 58\text{ ms}$.* |
 
 ---
 
-### 🧪 2. Servicio de Ingesta y Cálculo Energético (`POST /analisis-energetico`)
-* **Carga de Negocio:** Procesamiento e interpretación de DTOs JSON con evaluación del perfil energético.
-* **Estabilidad de Memoria:** Memoria RAM congelada en **418 MB / 954 MB** demostrando la ausencia de fugas de memoria (*memory leaks*).
-* **Métrica SLA:** Latencia **$p(95) = 74.36\text{ ms}$** y **0.00% tasa de fallos** sobre 133 peticiones reales.
+### 🧪 2. Energy Ingestion and Calculation Service (`POST /analisis-energetico`)
+* **Business Load:** Processing and interpretation of JSON DTOs with energy profile evaluation.
+* **Memory Stability:** RAM held steady at **418 MB / 954 MB**, demonstrating the absence of memory leaks.
+* **SLA Metric:** Latency **$p(95) = 74.36\text{ ms}$** and **0.00% failure rate** over 133 real requests.
 
-| 🟢 1. Estado Inicial (Basal) | 🟡 2. Pico de Carga (5 VUs) | 🟢 3. Reporte Final (`k6`) |
+| 🟢 1. Initial State (Baseline) | 🟡 2. Load Peak (5 VUs) | 🟢 3. Final Report (`k6`) |
 |:---:|:---:|:---:|
 | ![Energiai Baseline](./backend-java/k6/images/energiai/analisis-energetico-htop-baseline.png) | ![Energiai CPU Peak](./backend-java/k6/images/energiai/analisis-energetico-htop-cpu-peak.png) | ![Energiai Metrics](./backend-java/k6/images/energiai/analisis-energetico-k6-metrics-verde.png) |
-| *Servidor listo para recibir payloads de ingesta.* | *Absorción de carga JSON manteniendo consumo en ~418 MB.* | *133 peticiones POST procesadas en $< 75\text{ ms}$.* |
+| *Server ready to receive ingestion payloads.* | *Absorbing JSON load while keeping consumption at ~418 MB.* | *133 POST requests processed in $< 75\text{ ms}$.* |
 
 ---
 
-<a id="componentes"></a>
-## 📦 Componentes del Proyecto
+<a id="components"></a>
+## 📦 Project Components
 
-| Carpeta | Responsabilidad | Documentación |
+| Folder | Responsibility | Documentation |
 |---|---|---|
-| [`backend-java/`](./backend-java) | API principal, orquestador, reglas de negocio y fallback | [README](./backend-java/README.md) |
-| [`backend-python/`](./backend-python) | Servicio de Machine Learning (Inferencia FastAPI) | [README](./backend-python/README.md) |
-| [`data-science/`](./data-science) | Análisis exploratorio, entrenamiento y serialización | [README](./data-science/README.md) |
-| [`oci/`](./oci) | Infraestructura, scripts y reglas de firewall | [README](./oci/README.md) |
-| `postman/` | Colección de Postman para pruebas de integración | — |
+| [`backend-java/`](./backend-java) | Main API, orchestrator, business rules, and fallback | [README](./backend-java/README.md) |
+| [`backend-python/`](./backend-python) | Machine Learning service (FastAPI inference) | [README](./backend-python/README.md) |
+| [`data-science/`](./data-science) | Exploratory analysis, training, and serialization | [README](./data-science/README.md) |
+| [`oci/`](./oci) | Infrastructure, scripts, and firewall rules | [README](./oci/README.md) |
+| `postman/` | Postman collection for integration testing | — |
 
 ---
 
-<a id="tecnologías"></a>
-## 🛠️ Tecnologías
+<a id="technologies"></a>
+## 🛠️ Technologies
 
 ### Backend
 
 - **Java 21 LTS**
 - **Spring Boot 3.3.x**
 - **Jakarta Bean Validation**
-- Arquitectura por capas
+- Layered architecture
 - REST APIs
-- Patrón Fallback
+- Fallback pattern
 
 ### Machine Learning
 
@@ -235,17 +237,17 @@ El objetivo fue observar el comportamiento de los endpoints bajo carga y verific
 - **FastAPI**
 - **Scikit-Learn**
 - **Uvicorn**
-- Modelo serializado mediante `.pkl`
+- Model serialized via `.pkl`
 
 ### Frontend
 
 - **HTML5**
 - **CSS3**
-- **JavaScript Vanilla**
+- **Vanilla JavaScript**
 - CSS Custom Properties
 - CSS Keyframes
 
-### Cloud & Infraestructura
+### Cloud & Infrastructure
 
 - **Oracle Cloud Infrastructure (OCI)**
 - OCI Compute
@@ -268,49 +270,49 @@ El objetivo fue observar el comportamiento de los endpoints bajo carga y verific
 <a id="dataset"></a>
 ## 📊 Dataset
 
-El modelo predictivo fue entrenado utilizando el dataset público **[Household Energy Consumption](https://www.kaggle.com/datasets/samxsam/household-energy-consumption)** de Kaggle, procesado y optimizado para clasificación supervisada.
+The predictive model was trained using the public **[Household Energy Consumption](https://www.kaggle.com/datasets/samxsam/household-energy-consumption)** dataset from Kaggle, processed and optimized for supervised classification.
 
 ---
 
-<a id="equipo"></a>
-## 👥 Equipo y Atribución de Roles
+<a id="team"></a>
+## 👥 Team and Role Attribution
 
 ### Jonathan Marino
 
-Exploración, curado y limpieza del dataset mediante análisis exploratorio de datos (EDA).
+Exploration, curation, and cleaning of the dataset through exploratory data analysis (EDA).
 
 [LinkedIn](https://www.linkedin.com/in/jonathan-marino/)
 
 ### Hernán Pérez Melgar
 
-Entrenamiento y evaluación del modelo de clasificación y generación del modelo serializado (`.pkl`).
+Training and evaluation of the classification model and generation of the serialized model (`.pkl`).
 
 [LinkedIn](https://www.linkedin.com/in/hernan-perez-melgar-320088184/)
 
 ### Héctor Pablo Graff — P4154N0
 
-**Ingeniería de Software & Desarrollo Integral End-to-End**
+**Software Engineering & End-to-End Development**
 
-Responsabilidades principales:
+Main responsibilities:
 
-- Diseño y desarrollo del **Backend Core** con Java 21 / Spring Boot 3.3.x.
-- Implementación de DTOs, validaciones y reglas de negocio.
-- Diseño e implementación de la **estrategia Fallback**.
-- Desarrollo del microservicio de inferencia ML con **Python / FastAPI**.
-- Diseño de la arquitectura de integración entre Java, Python y el modelo predictivo.
-- Diseño, despliegue y hardening de infraestructura en **Oracle Cloud Infrastructure (OCI)**.
-- Diseño y ejecución de pruebas de carga y estrés con **Grafana k6**.
-- Análisis de métricas de latencia, errores y utilización de recursos.
-- Monitoreo de infraestructura mediante `htop`.
-- Diseño y desarrollo del frontend.
-- Implementación del velocímetro dinámico.
-- Implementación de tarifa configurable.
-- Implementación de internacionalización ES / EN.
-- Implementación de indicadores visuales de observabilidad y estado de API.
+- Design and development of the **Core Backend** with Java 21 / Spring Boot 3.3.x.
+- Implementation of DTOs, validations, and business rules.
+- Design and implementation of the **Fallback strategy**.
+- Development of the ML inference microservice with **Python / FastAPI**.
+- Design of the integration architecture between Java, Python, and the predictive model.
+- Design, deployment, and hardening of infrastructure on **Oracle Cloud Infrastructure (OCI)**.
+- Design and execution of load and stress testing with **Grafana k6**.
+- Analysis of latency, error, and resource utilization metrics.
+- Infrastructure monitoring via `htop`.
+- Frontend design and development.
+- Implementation of the dynamic gauge.
+- Implementation of the configurable rate.
+- Implementation of ES / EN internationalization.
+- Implementation of observability and API status visual indicators.
 
 [LinkedIn](https://www.linkedin.com/in/hector-pablo-graff/)
 
-### Soporte Colaborativo
+### Collaborative Support
 
 - Agustina Lerda
 - Annie Lehmann
@@ -318,10 +320,10 @@ Responsabilidades principales:
 
 ---
 
-<a id="ejecucion"></a>
-## ⚙️ Cómo Ejecutar el Proyecto
+<a id="execution"></a>
+## ⚙️ How to Run the Project
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/P4154N0/energiai.git
@@ -329,7 +331,7 @@ cd energiai
 ```
 ---
 
-### 2. Iniciar el Microservicio de IA (Python)
+### 2. Start the AI Microservice (Python)
 
 ```bash
 cd backend-python
@@ -338,7 +340,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 ---
 
-### 3. Iniciar el Backend Principal (Java)
+### 3. Start the Main Backend (Java)
 
 ```bash
 cd backend-java
@@ -346,39 +348,39 @@ cd backend-java
 ```
 ---
 
-La aplicación estará accesible desde el navegador en http://localhost:8080.
+The application will be accessible from the browser at http://localhost:8080.
 
 ---
 
-<a id="documentacion-tecnica"></a>
-## 📄 Documentación Técnica
+<a id="technical-documentation"></a>
+## 📄 Technical Documentation
 
 http://localhost:8080/swagger-ui.html
 
 ---
 
-<a id="créditos"></a>
-## 🙌 Créditos & Agradecimientos
+<a id="credits"></a>
+## 🙌 Credits & Acknowledgments
 
-Proyecto desarrollado en el marco de la simulación laboral de **No Country** junto al programa **ONE (Oracle Next Education)** — Proyectos G9 | **Alura Latam** + **Oracle**.
+Project developed as part of the **No Country** work simulation program together with the **ONE (Oracle Next Education)** program — G9 Projects | **Alura Latam** + **Oracle**.
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
-Diseñado y desarrollado por **P4154N0 (Héctor Pablo Graff)**.
+Designed and developed by **P4154N0 (Héctor Pablo Graff)**.
 
-**Ingeniero de software especializado en sistemas distribuidos y arquitecturas de telemetría.** Actualmente radicado en Argentina, con el objetivo profesional de aportar valor tecnológico a los **sectores energético e industrial** en Calgary, Alberta, Canadá.
+**Software engineer specialized in distributed systems and telemetry architectures.** Currently based in Argentina, with the professional goal of bringing technological value to the **energy and industrial sectors** in Calgary, Alberta, Canada.
 
 🔗 [**LinkedIn**](https://www.linkedin.com/in/hector-pablo-graff/)  
 💻 [**Portfolio**](https://p4154n0.github.io/portfolio/)
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
-El código fuente de este proyecto se encuentra bajo la licencia **MIT**.
+The source code of this project is licensed under the **MIT** license.
 
-Consulta el archivo [**LICENSE**](./LICENSE) para conocer los términos completos.
+See the [**LICENSE**](./LICENSE) file for the full terms.
 
-El contenido personal, materiales de presentación y recursos de terceros no están cubiertos por la licencia MIT salvo que se indique expresamente lo contrario.
+Personal content, presentation materials, and third-party resources are not covered by the MIT license unless expressly stated otherwise.
